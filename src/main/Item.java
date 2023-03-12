@@ -11,4 +11,19 @@ public class Item {
         this.quantity = quantity;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }
