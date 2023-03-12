@@ -65,6 +65,45 @@ public class InventoryTest {
         Assert.assertEquals(10, inventory.getInventory().size());
     }
 
+    @Test
+    public void testUpdateItemWithValidID() throws InventoryException {
+        Inventory inventory = getMockInventory(10);
+        String newName = "NEW NAME";
+        String newDescription = "NEW DESCRIPTION";
+        int newQuantity = 11;
+
+        inventory.updateItem("1", newName, newDescription, newQuantity);
+
+        Assert.assertEquals("1", inventory.getInventory().get(0).getId());
+        Assert.assertEquals(newName, inventory.getInventory().get(0).getName());
+        Assert.assertEquals(newDescription, inventory.getInventory().get(0).getDescription());
+        Assert.assertEquals(newQuantity, inventory.getInventory().get(0).getQuantity());
+    }
+
+    @Test
+    public void testUpdateItemWithInvalidID() throws InventoryException {
+        Inventory inventory = getMockInventory(10);
+        String newName = "NEW NAME";
+        String newDescription = "NEW DESCRIPTION";
+        int newQuantity = 11;
+
+        InventoryException exception = Assert.assertThrows(InventoryException.class, () -> inventory.updateItem("11", newName, newDescription, newQuantity));
+        Assert.assertEquals("Unavailable item: Cannot find an item with the provided id = 11",
+                exception.toString());
+    }
+
+    @Test
+    public void testUpdateItemWithNegativeQuantity() throws InventoryException {
+        Inventory inventory = getMockInventory(10);
+        String newName = "NEW NAME";
+        String newDescription = "NEW DESCRIPTION";
+        int newQuantity = -1;
+
+        InventoryException exception = Assert.assertThrows(InventoryException.class, () -> inventory.updateItem("5", newName, newDescription, newQuantity));
+        Assert.assertEquals("Negative quantity: Cannot enter item with negative quantity",
+                exception.toString());
+    }
+
     public Inventory getMockInventory(int size) throws InventoryException {
         Inventory inventory = new Inventory();
         for (int i = 0; i < size; i++) {

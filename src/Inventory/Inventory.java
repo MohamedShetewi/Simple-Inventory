@@ -26,8 +26,17 @@ public class Inventory {
         itemsList.remove(index);
     }
 
-    public void updateItem(String itemId, String name, String description, int quantity) {
+    public void updateItem(String itemId, String name, String description, int quantity) throws InventoryException {
+        int index = SearchItems.searchForItemIndex(itemId, itemsList);
+        if (index == -1)
+            throw new InventoryException("Unavailable item: Cannot find an item with the provided id = " + itemId);
+        if (quantity < 0)
+            throw new InventoryException("Negative quantity: Cannot enter item with negative quantity");
 
+        Item itemToBeUpdated = itemsList.get(index);
+        itemToBeUpdated.setName(name);
+        itemToBeUpdated.setDescription(description);
+        itemToBeUpdated.setQuantity(quantity);
     }
 
     public Item getItem(String id) {
