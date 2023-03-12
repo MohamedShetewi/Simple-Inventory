@@ -1,4 +1,4 @@
-package main;
+package Inventory;
 
 import java.util.ArrayList;
 
@@ -19,8 +19,11 @@ public class Inventory {
         itemsList.add(newItem);
     }
 
-    public void removeItem(String id) {
-
+    public void removeItem(String id) throws InventoryException {
+        int index = SearchItems.searchForItemIndex(id, itemsList);
+        if (index == -1)
+            throw new InventoryException("Unavailable item: Cannot find an item with the provided id = " + id);
+        itemsList.remove(index);
     }
 
     public void updateItem(String itemId, String name, String description, int quantity) {

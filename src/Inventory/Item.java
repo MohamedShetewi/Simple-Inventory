@@ -1,4 +1,4 @@
-package main;
+package Inventory;
 
 public class Item {
     private String id, name, description;
@@ -25,5 +25,15 @@ public class Item {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", quantity=" + quantity +
+                '}';
     }
 }

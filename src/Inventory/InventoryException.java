@@ -1,4 +1,4 @@
-package main;
+package Inventory;
 
 public class InventoryException extends Exception {
 
