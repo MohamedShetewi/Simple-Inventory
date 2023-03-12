@@ -104,6 +104,31 @@ public class InventoryTest {
                 exception.toString());
     }
 
+    @Test
+    public void testGetItemWithValidID() throws InventoryException {
+        Inventory inventory = new Inventory();
+
+        for (int i = 0; i < 10; i++) {
+            inventory.addItem(mockName + i, mockDescription + i, mockQuantity);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            Item item = inventory.getItem((i + 1) + "");
+            Assert.assertEquals(mockName + i, item.getName());
+            Assert.assertEquals(mockDescription + i, item.getDescription());
+            Assert.assertEquals(mockQuantity, item.getQuantity());
+        }
+    }
+
+    @Test
+    public void testGetItemWithInvalidID() throws InventoryException {
+        Inventory inventory = getMockInventory(10);
+        InventoryException exception = Assert.assertThrows(InventoryException.class, () -> {
+            inventory.getItem("5555");
+        });
+        Assert.assertEquals("Unavailable item: Cannot find an item with the provided id = 5555", exception.toString());
+    }
+
     public Inventory getMockInventory(int size) throws InventoryException {
         Inventory inventory = new Inventory();
         for (int i = 0; i < size; i++) {

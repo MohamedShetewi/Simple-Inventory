@@ -39,8 +39,11 @@ public class Inventory {
         itemToBeUpdated.setQuantity(quantity);
     }
 
-    public Item getItem(String id) {
-        return null;
+    public Item getItem(String id) throws InventoryException {
+        int index = SearchItems.searchForItemIndex(id, itemsList);
+        if (index == -1)
+            throw new InventoryException("Unavailable item: Cannot find an item with the provided id = " + id);
+        return itemsList.get(index);
     }
 
     public ArrayList<Item> getInventory() {
