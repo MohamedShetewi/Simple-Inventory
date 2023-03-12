@@ -4,6 +4,7 @@ The application allows users to add, remove, and update items in the inventory, 
 Each item in the inventory have a unique identifier, a name, a description, and a quantity.
 
 # How-to-use?
+- SDK 19 was used in the development.
 - Run the main method in the Main package.
 - You can use any of the following commands:
   - Add Item (enter "-add")
